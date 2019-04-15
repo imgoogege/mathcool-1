@@ -1,0 +1,49 @@
+{{define "index"}}
+    {{template "smallNav".}}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div id="allTestlist" style="height: 80rem;width: 80rem">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('allTestlist'));
+
+        // 指定图表的配置项和数据
+        var option = {
+            opts:{
+                height:"null",
+                width:"null",
+            },
+            title: {
+                text: 'mathcool all test list'
+            },
+            tooltip: {},
+            legend: {
+
+            },
+            series: [{
+                name: '出题量',
+                type: 'pie',
+                radius:"100%",
+                roseType: 'angle',
+                data: [
+                    {{range $k,$v:= .testlistData }}
+                    {
+                        name:{{$v.name}},
+                        value:{{$v.value}},
+
+                    },
+                    {{end}}
+                ]
+            }]
+        };
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+    </script>
+{{end}}

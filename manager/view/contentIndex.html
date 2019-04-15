@@ -1,0 +1,37 @@
+{{define "content"}}
+    {{if .isRoot}}
+{{/*        如果是超级用户的话*/}}
+    <br>
+        <form action="/rootSetUser" method="post" class="form-group">
+{{/*            设置普通用户*/}}
+            <input type="text" name="indexRootSetUser" placeholder="设置员工的用户名，系统会自动返回该员工的密码，密码不可更改，请牢牢记得" class="form-control">
+            <h3>选择级别</h3>
+           <select name="level" class="form-control">
+               <option value="2">
+                   2
+               </option>
+               <option value="3">
+                   3
+               </option>
+               <option value="4">
+                   4
+               </option>
+               <option value="5">
+                   5
+               </option>
+               <option value="6">
+                   6
+               </option>
+               <option value="7">
+                   7
+               </option>
+           </select>
+            <input type="submit" name="设置用户" class="form-control btn btn-info">
+            <a href="/">请点击前往控制台</a>
+        </form>
+        {{else}}
+{{/*            是普通用户*/}}
+        <a href="/">请点击前往控制台</a>
+
+    {{end}}
+{{end}}

@@ -1,0 +1,56 @@
+{{define "index"}}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4 mx-auto" style="text-align: center">
+                <br>
+                <a href="/">
+                <img src="https://raw.githubusercontent.com/realnudao/images/master/mathcool.jpg" width="40%" class="img-fluid rounded-circle"  style="margin-left: auto;margin-right: auto;display: block">
+                </a>
+                <hr>
+                <form class="form-signin mx-auto" method="post" action="/signIn">
+                    <h1 class="h3 mb-3 font-weight-normal mx-auto">请登录</h1>
+                    <label for="inputEmail" class="sr-only">邮箱地址</label>
+                    <input type="email" id="inputEmail" class="form-control border border-info" placeholder="邮箱地址" name="signInEmail" required autofocus>
+                    <label for="inputPassword" class="sr-only">密码</label>
+                    <br>
+                    <input type="password" id="inputPassword" class="form-control border border-info" placeholder="密码" name="signInPassword" required>
+                    <br>
+                    <div class="checkbox mb-3">
+                        <label class="mx-auto">
+                            <input type="checkbox" value="remember-me"> Remember me
+                        </label>
+                    </div>
+                    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+                </form>
+                <hr>
+{{/*                <div>*/}}
+{{/*                    <p>*/}}
+{{/*                        其它登陆方式*/}}
+{{/*                    </p>*/}}
+{{/*                </div>*/}}
+{{/*                <div class="row">*/}}
+{{/*                    <div class="col-md-4 col-sm-4">*/}}
+{{/*                        <a href="/">*/}}
+{{/*                        <img src="/static/img/wechatSignIn.png" width="40%" alt="wechat" class="img-fluid">*/}}
+{{/*                        </a>*/}}
+{{/*                    </div>*/}}
+{{/*                    <div class="col-md-4 col-sm-4">*/}}
+{{/*                        <a href="/">*/}}
+{{/*                        <img src="/static/img/qqSignIn.png" alt="qq" width="40%" class="img-fluid">*/}}
+{{/*                        </a>*/}}
+{{/*                    </div>*/}}
+{{/*                    <div class="col-md-4 col-sm-4">*/}}
+{{/*                        <a href="/">*/}}
+{{/*                        <img src="/static/img/weiboSignIn.png" alt="weibo" width="40%" class="img-fluid">*/}}
+{{/*                        </a>*/}}
+{{/*                    </div>*/}}
+{{/*                </div>*/}}
+                <div class="mx-auto">
+                    <p class="mt-5 mb-3 text-muted" >&copy; 2015-2019</p>
+                </div>
+            </div>
+            <div class="col-md-4"></div>
+        </div>
+    </div>
+{{end}}

@@ -1,0 +1,64 @@
+{{define "text_center"}}
+    <div class="container">
+        <div class="row">
+
+            <div class="col-12">
+                <br>
+                <br>
+                <br>
+                <br>
+                {{range $k,$v := .examQuestion}}
+                    <p class=" text-info" style="font-size: 1.1rem;"><a href="/w?contentPlus={{$v.contentPlus}}"class="text-info ">{{$v.title}}</a></p>
+
+                {{end}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-12 text-center">
+                <ul class="pagination">
+                    <li class="page-item" id="btn{{.pagePre}}"><a class="page-link" href="javascript:doPost('/examQuestion?page={{.pagePre}}')" >&lt</a></li>
+                    <li class="page-item active" id="btn{{.pageThis}}"><a class="page-link" href="javascript:doPost('/examQuestion?page={{.pageThis}}')">{{.pageThis}}</a></li>
+                    {{range $k,$v := .page}}
+                        <li class="page-item page-item-control" id="btn{{$v}}"><a class="page-link" href="javascript:doPost('/examQuestion?page={{$v}}')">{{$v}}</a></li>
+                    {{end}}
+                    <li class="page-item" id="btn{{.pageLast}}"><a class="page-link" href="javascript:doPost('/examQuestion?page={{.pageLast}}')">&gt</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="google-ads">
+                    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                    <!-- mathcool -->
+                    <ins class="adsbygoogle"
+                         style="display:block"
+                         data-ad-client="ca-pub-3341767526260446"
+                         data-ad-slot="3571898718"
+                         data-ad-format="auto"
+                         data-full-width-responsive="true"></ins>
+                    <script>
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        // 模拟a的post请求
+        function doPost(to, p) { // to:提交动作（action）,p:参数
+            var myForm = document.createElement("form");
+            myForm.method = "post";
+            myForm.action = to;
+            for (var i in p){
+                var myInput = document.createElement("input");
+                myInput.setAttribute("name", i); // 为input对象设置name
+                myInput.setAttribute("value", p[i]); // 为input对象设置value
+                myForm.appendChild(myInput);
+            }
+            document.body.appendChild(myForm);
+            myForm.submit();
+            document.body.removeChild(myForm); // 提交后移除创建的form
+        }
+    </script>
+
+{{end}}

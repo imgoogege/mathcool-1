@@ -1,0 +1,54 @@
+{{define "text_center"}}
+    <div >
+        <br>
+            <div style="color: rgba(38,38,38,1);text-align: center">
+                <h4>{{.title}}</h4>
+               <br>
+            </div>
+            <div style="color: darkgray;font-size: large">
+                <p class="text-info"><a class="text-info" href="/u/{{.userName}}">{{.userName}}</a></p>
+                <br>
+                <br>
+            </div>
+            {{/*content*/}}
+            <div style="text-align: left">
+                <div style="color: rgba(0,0,0,0);font-size: 1px">
+                    本站资源，本站拥有知识产权，如有侵权，请立即放弃侵权行为，如果要转走文章，请务必写明转载，以及本站的网址，谢谢。
+                </div>
+                {{.contentValue}}
+            </div>
+            {{/*发布的时间*/}}
+        <hr>
+        <div style="float: left">
+            <p  style="cursor: pointer" id="zan{{.contentPlus}}"><i class="fas fa-thumbs-up"></i></p>
+            <script>
+                    {{/*                增加👍的script*/}}
+                    document.getElementById("zan{{.contentPlus}}").addEventListener("click",function () {
+                    getDataFetch("","/addZan?contentPlus={{.contentPlus}}")
+                        document.getElementById("zan{{.contentPlus}}").style.border="black 0.1rem solid"
+                        })
+            </script>
+        </div>
+            <div style="float: right">
+                {{.join_time}}
+            </div>
+        <br>
+        <br>
+        <br>
+        <div class="google-ads"  >
+            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <!-- mathcool -->
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-3341767526260446"
+                 data-ad-slot="3571898718"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+        {{template "smallExam".}}
+        {{template "smallComment".}}
+    </div>
+{{end}}

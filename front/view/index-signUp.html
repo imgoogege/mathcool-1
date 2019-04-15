@@ -1,0 +1,68 @@
+{{define "index"}}
+    {{template "smallNav".}}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4 mx-auto" style="text-align: center">
+                <br>
+                <a href="/">
+                <img src="https://raw.githubusercontent.com/realnudao/images/master/mathcool.jpg" width="40%" class="img-fluid rounded-circle"  style="margin-left: auto;margin-right: auto;display: block">
+                </a>
+                <hr>
+                <form class="form-signin mx-auto" method="post" action="/signUp" id="signUpForm" onsubmit=" return SignUpFunc()">
+                    <h1 class="h3 mb-3 font-weight-normal mx-auto">注册</h1>
+                    <label for="inputEmail" class="sr-only">邮箱地址(必填)</label>
+                    <input type="email" id="inputEmail" class="form-control border border-info" placeholder="邮箱地址(必填)" required autofocus name="signUpEmail">
+                    <br>
+                    <label for="inputPassword" class="sr-only">密码</label>
+                    <input type="password" id="inputPassword" class="form-control border border-info" placeholder="密码(必填)" required name="signUpPassword">
+                    <br>
+                    <input type="password" id="inputPasswordAgain" class="form-control border border-info" placeholder="重复密码(必填)" required>
+                    <br>
+                    <label for="inputPassword" class="sr-only">username</label>
+                    <input type="text" id="inputUserName" class="form-control border border-info" placeholder="username(必填)" required name="signUpUserName">
+                    <br>
+                    <label for="inputPassword" class="sr-only">性别</label>
+                    <select name="signUpSex" class="form-control border border-info" id="signUpSexID">
+                        <option value="1">男</option>
+                        <option value="2">女</option>
+                    </select>
+                    <br>
+                    <label for="inputPassword" class="sr-only">年龄</label>
+                    <input type="text" id="inputYear" class="form-control border border-info" placeholder="年龄 例如1996-12-01"  name="signUpUserYear">
+                    <br>
+                    <label for="inputPassword" class="sr-only">电话</label>
+                    <input type="tel" id="inputPhoneNumber" class="form-control border border-info" placeholder="电话号码"  name="signUpPhoneNumber">
+                    <br>
+                    <label for="inputPassword" class="sr-only">简介</label>
+                    <input type="text" id="inputDescription" class="form-control border border-info" placeholder="简介"  name="signUpDescription">
+                    <br>
+                    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign up</button>
+                    <p class="mt-5 mb-3 text-muted">&copy; 2015-2019</p>
+                </form>
+                <script>
+                    {{/*    检测form提交的事件，然后检测密码是否两次一样，第二 检测 必须得东西是否写了。                */}}
+                    let SignUpFunc = ()=> {
+                        let againPassword = document.getElementById("inputPasswordAgain").value
+                        let password = document.getElementById("inputPassword").value
+                        let tUserName = document.getElementById("inputUserName").value
+                        if (password != againPassword){
+                            document.getElementById("signUpTishi").innerText = "无法提交，因为您的两次密码不一致"
+                            return false
+                        }
+                        if (tUserName == ""){
+                            document.getElementById("signUpTishi").innerText = "请填写字段"
+                            return false
+                        }
+                        return true
+
+                    }
+                </script>
+            </div>
+            <div class="col-md-4">
+                <div id="signUpTishi"></div>
+            </div>
+        </div>
+    </div>
+    {{template "foot".}}
+{{end}}

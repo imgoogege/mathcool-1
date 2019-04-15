@@ -1,0 +1,52 @@
+{{define "text_center"}}
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <form method="post" action="/formula">
+
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <input type="text" placeholder="请输入要查询的公式 如：'微积分'" name="formulaValue" class="  border border-info" style="width: 20rem;height: 3rem;border-radius: 0.8rem">
+                    <input type="submit" class="btn btn-info" value="查询">
+                </form>
+                <br>
+                {{range $k,$v := .formulaData}}
+                    <p><a href="/w?contentPlus={{$v.contentPlus}}"class="text-info">{{$v.title}}</a></p>
+                {{end}}
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-12 text-center">
+                <ul class="pagination">
+                    <li class="page-item" id="btn{{.pagePre}}"><a class="page-link" href='/formula?page={{.pagePre}}' >&lt</a></li>
+                    <li class="page-item active" id="btn{{.pageThis}}"><a class="page-link" href='/formula?page={{.pageThis}}'>{{.pageThis}}</a></li>
+                    {{range $k,$v := .page}}
+                        <li class="page-item page-item-control" id="btn{{$v}}"><a class="page-link" href='/formula?page={{$v}}'>{{$v}}</a></li>
+                    {{end}}
+                    <li class="page-item" id="btn{{.pageLast}}"><a class="page-link" href='/formula?page={{.pageLast}}'>&gt</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="google-ads">
+                    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                    <!-- mathcool -->
+                    <ins class="adsbygoogle"
+                         style="display:block"
+                         data-ad-client="ca-pub-3341767526260446"
+                         data-ad-slot="3571898718"
+                         data-ad-format="auto"
+                         data-full-width-responsive="true"></ins>
+                    <script>
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{{end}}

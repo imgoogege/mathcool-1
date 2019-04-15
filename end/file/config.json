@@ -1,0 +1,7 @@
+{
+  "portT": ":5200",
+  "serverURL" : "http://localhost:8090/",
+  "version" : "0.1.0",
+  "port": ":80",
+  "dbUrl": "root:359258Ls@tcp(localhost:3306)/mathcoolEnd"
+}

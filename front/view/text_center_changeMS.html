@@ -1,0 +1,53 @@
+{{define "text_center"}}
+    <div class="container">
+        <br>
+        <br>
+        <div class="row">
+            <div class="col-1"></div>
+           <div class="col-10 col-sm-10 col-md-10">
+               <code id="signUpTishi" class="text-muted" style="font-size: 1.2rem"></code>
+               <form class="form-signin mx-auto" method="post" action="/changeMS" onsubmit="return SignUpFunc()">
+                   <h3 class="h3 mb-3 font-weight-normal mx-auto">更改密码</h3>
+                   <code>请注意：请设置密码长度不小于6位的复杂密码</code>
+                   <br>
+                   <br>
+                   <code>如果你是修改密码请将旧密码和新密码以及新的确定密码都填上，如果你不修改密码，密码那几个选线不要填修改下面的非必须信息即可</code>
+                   <br>
+                   <br>
+{{/*                   <code> 同样的，如果你想改变你的邮箱，那么你需要先验证你旧的邮箱，因为你的邮箱是你登陆的唯一凭证。谢谢您。</code>*/}}
+                   <label for="inputEmail" class="sr-only">请输入旧的的密码</label>
+                   <input type="password" id="oldPassWord" class="form-control border border-info" placeholder="旧的密码"  autofocus name="oldPassword">
+                   <label for="inputPassword" class="sr-only">请输入新的密码</label>
+                   <br>
+                   <input type="password" id="newPassWord" class="form-control border border-info" placeholder="新的密码"  name="newPassword">
+                   <br>
+                   <input type="password" id="newPassWordAgain" class="form-control border border-info" placeholder="再次输入新的密码"  name="newPassword1">
+                   <br>
+                   <input type="text" id="inputPassword" class="form-control border border-info" placeholder="新的手机号"  name="newPhoneNumber">
+                   <br>
+                   <label for="inputEmail" class="sr-only">请输入新的出生年月</label>
+                   <input type="text" id="inputEmail" class="form-control border border-info" placeholder="新的出生年月日例如 2008-08-08"  autofocus name="newYear">
+                   <br>
+                   <textarea name="newDescription" placeholder="请输入您新的自我介绍" class="form-control"></textarea>
+                   <button class="btn btn-lg btn-primary btn-block" type="submit">提交</button>
+               </form>
+           </div>
+            <div class="col-1"></div>
+            <div class="col-12 col-sm-12 col-md-12" >
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+    <script>
+        let SignUpFunc = ()=> {
+            let againPassword = document.getElementById("newPassWordAgain").value
+            let password = document.getElementById("newPassWord").value
+            if (password != againPassword){
+                document.getElementById("signUpTishi").innerText = "无法提交，因为您的两次密码不一致"
+                return false
+            }
+            return true
+        }
+    </script>
+{{end}}

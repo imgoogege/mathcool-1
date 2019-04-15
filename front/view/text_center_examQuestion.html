@@ -1,0 +1,52 @@
+{{define "text_center"}}
+    <div class="container">
+        <div class="row">
+
+            <div class="col-12">
+                <br>
+                <br>
+                <br>
+                <br>
+                <form method="post" action="/examQuestion">
+                    <input type="text" placeholder="请输入要查询的试题年级 如：'初三'" name="examQuestion" class="border border-info another-form" style="height: 3rem;width: 20rem;border-radius: 0.8rem">
+                    <input type="submit" class="btn btn-info" value="查询">
+                </form>
+                <br>
+                {{range $k,$v := .examQuestion}}
+                    <p class=" text-info" style="font-size: 1.1rem;"><a href="/w?contentPlus={{$v.contentPlus}}"class="text-info ">{{$v.title}}</a></p>
+
+                {{end}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-12 text-center">
+                <ul class="pagination">
+                    <li class="page-item" id="btn{{.pagePre}}"><a class="page-link" href='/examQuestion?page={{.pagePre}}' >&lt</a></li>
+                    <li class="page-item active" id="btn{{.pageThis}}"><a class="page-link" href='/examQuestion?page={{.pageThis}}'>{{.pageThis}}</a></li>
+                    {{range $k,$v := .page}}
+                        <li class="page-item page-item-control" id="btn{{$v}}"><a class="page-link" href='/examQuestion?page={{$v}}'>{{$v}}</a></li>
+                    {{end}}
+                    <li class="page-item" id="btn{{.pageLast}}"><a class="page-link" href='/examQuestion?page={{.pageLast}}'>&gt</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="google-ads">
+                    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                    <!-- mathcool -->
+                    <ins class="adsbygoogle"
+                         style="display:block"
+                         data-ad-client="ca-pub-3341767526260446"
+                         data-ad-slot="3571898718"
+                         data-ad-format="auto"
+                         data-full-width-responsive="true"></ins>
+                    <script>
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{{end}}

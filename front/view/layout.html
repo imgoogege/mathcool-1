@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html lang="zh_CN">
+<head>
+    {{template "head".}}<!-- 将所有的head信息插入-->
+</head>
+<body>
+{{/*当你想在index这个末班中的数据要将它反映到这个文件中，那么 你需要使用 这个 template "index".  不要忘记这个点。*/}}
+{{ template "index".}}<!--正文部分-->
+{{template "alljs".}}<!--将所有的js信息插入-->
+</body>
+</html>

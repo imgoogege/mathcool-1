@@ -1,0 +1,115 @@
+{{define "allcss"}}
+<style>
+    body{
+        line-height: 1.9rem;
+        letter-spacing: 0.05rem;
+        /*font-weight: 400;*/
+        /*font-family: "";*/
+    }
+    .google-ads{
+        border: rgba(204,208,211,1) 0.1rem solid;
+        min-height: 300px;
+    }
+    pre{
+        background: rgba(38,41,48,1);
+        color: rgba(173,89,201,1);
+    }
+    {{/*让绿框框消失的描述*/}}
+    .form-control:focus{
+        border-color: #cccccc;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+    }
+    input:focus{
+        outline: 0px;
+        border-color: #cccccc;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+    }
+    /*让textarea不再变长*/
+    textarea{
+        resize: none;
+    }
+    @media screen and (max-width:767px){
+            .text_right{
+                text-align: left;
+            }
+        .text_left_show{
+            display: none;
+        }
+        /*显示*/
+        .navbar-hide{
+            display: inherit;
+        }
+        .navbar-hide-1{
+            display: none;
+        }
+        /*隐蔽*/
+        .navbar-show-1-btn {
+            margin-top: 0.2rem;
+
+        }
+
+    }
+    @media screen and (min-width: 1150px){
+        #zhuce{
+            margin-left: 5rem;
+        }
+    }
+    @media screen and (max-width:991px) {
+        .navbar-hide-1{
+            text-align: center;
+        }
+        .google-ads-left{
+            display: none;
+        }
+    }
+    @media screen and (min-width:767px) {
+        .pagination{
+            margin-left: 8rem;
+        }
+        .search-show-big{
+            margin-left: 5rem;
+        }
+        .navbar-nav-search-input{
+            outline: 0px;
+        }
+        .navbar-show-1-btn{
+            margin-left: 0.2rem;
+        }
+
+        .tiaojie{
+            display: none;
+        }
+       .navbar-show{
+           display: block;
+       }
+        .navbar-hide{
+            display: none;
+        }
+        .navbar-hide-1{
+            display: inherit;
+        }
+    }
+
+    .foot-ul{
+        margin-top: 1rem;
+        color: rgba(256,256,256,0.7);
+        list-style: none;
+    }
+    .text_left{
+        font-size: 0.9rem;
+    }
+    .text-left-li {
+        line-height: 1.5rem;
+    }
+    .text_right{
+        font-size: 0.6rem;
+        overflow: visible;
+    }
+    .test-right-li{
+        margin-top: 0.3rem;
+        line-height: 1rem;
+    }
+</style>
+{{end}}

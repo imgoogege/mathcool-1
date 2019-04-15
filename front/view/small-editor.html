@@ -1,0 +1,117 @@
+{{define "smallEditor"}}
+    <div class="container-fluid" style="padding: 0">
+     <div class="row">
+         <div class="col-12">
+             <br>
+             <br>
+             <br>
+             <br>
+             <br>
+             <br>
+             <form method="post" action="/content?typeList={{.typeList}}&motherContentPlus={{.motherContentPlus}}">
+                 <div class="input-group mb-3 input-group-md">
+                     <div class="input-group-prepend">
+                         <span class="input-group-text">题目:</span>
+                     </div>
+                     <input type="text" class="form-control" required name="editorTitle" placeholder="题目,最多不要超过40个字" id="editorTitle">
+                 </div>
+                 <div class="form-group">
+            <textarea class="form-control" required id="validationTextarea" rows="14" style="outline: none"  placeholder="本文档支持 markdown" name="editorBody"></textarea>
+                 </div>
+                 {{/*选择的主题*/}}
+                 <div class="container-fluid">
+                     <div class="row">
+                         <div class="col-4">
+                             <div class="form-group">
+                                 <label for="sel1">主题选择:</label>
+                                 <select class="form-control" name="typeList" id="topic">
+                                     {{/*                            <option value="6">配套试题</option>*/}}
+                                     <option value="2">问题</option>
+                                     <option value="1">文章</option>
+                                     {{/*                            <option value="3">工作</option>*/}}
+                                     {{/*                            <option value="40">试题</option>*/}}
+                                     {{/*                            <option value="50">公式</option>*/}}
+                                     <option value="7">意见</option>
+                                 </select>
+                             </div>
+                         </div>
+                         <div class="col-4">
+                             <div class="form-group">
+                                 <label for="sel1">TAG选择</label>
+                                 <select class="form-control" name="tag">
+                                     {{/*                            <option value="1">关于工作</option>*/}}
+                                     <option value="2">大学本科数学</option>
+                                     <option value="3">小学</option>
+                                     <option value="4">初中</option>
+                                     <option value="5">高中</option>
+                                     <option value="6">考研数学</option>
+                                     <option value="7">研究生以及以上的数学</option>
+                                 </select>
+                             </div>
+                         </div>
+                         <div class="col-4">
+                             {{/*                    <div class="form-group">*/}}
+                             {{/*                        <label for="sel1" id="peitaoLabel" style="">选择:</label>*/}}
+                             {{/*                        */}}{{/*<input placeholder="没有或工作主题的不写" class="form-control" id="fetchFormula" onfocus="ChooseFetchFormula">*/}}
+                             {{/*                        <input class="form-control"  value="" name="content-plus" id="fetchFormula"  type="search" style="width:80%">*/}}
+                             {{/*                    </div>*/}}
+                         </div>
+                         {{/*                <script>*/}}
+                         {{/*                    let peitaoLabel = document.getElementById("peitaoLabel")*/}}
+                         {{/*                    let validationTextarea = document.getElementById("validationTextarea")*/}}
+                         {{/*                    let editorTitle = document.getElementById("editorTitle")*/}}
+                         {{/*                    let b = document.getElementById("topic")*/}}
+                         {{/*                    let typ = GetUrlParam("chuti")*/}}
+                         {{/*                    let fetchFormula = document.getElementById("fetchFormula")*/}}
+                         {{/*                    validationTextarea.onclick =function(){*/}}
+                         {{/*                        let ffa = document.getElementById("fetchFormula")*/}}
+                         {{/*                        $('#topic').val();*/}}
+                         {{/*                        let da = $('#topic option:selected').val();*/}}
+                         {{/*                        if (da != "配套试题") {*/}}
+                         {{/*                            peitaoLabel.style.display = "none"*/}}
+                         {{/*                            ffa.style.display = "none"*/}}
+                         {{/*                        } else {*/}}
+                         {{/*                            peitaoLabel.style.display = "block"*/}}
+                         {{/*                            ffa.style.display = "block"*/}}
+                         {{/*                            fetchFormula.value = typ*/}}
+                         {{/*                        }*/}}
+                         {{/*                    }*/}}
+                         {{/*                    editorTitle.onclick = function (){*/}}
+
+                         {{/*                        let ffa = document.getElementById("fetchFormula")*/}}
+                         {{/*                        $('#topic').val();*/}}
+                         {{/*                        let da = $('#topic option:selected').val();*/}}
+                         {{/*                        if (da != "配套试题") {*/}}
+                         {{/*                            peitaoLabel.style.display = "none"*/}}
+                         {{/*                            ffa.style.display = "none"*/}}
+                         {{/*                        } else {*/}}
+                         {{/*                            peitaoLabel.style.display = "block"*/}}
+                         {{/*                            ffa.style.display = "block"*/}}
+                         {{/*                            fetchFormula.value = typ*/}}
+                         {{/*                        }*/}}
+                         {{/*                    }*/}}
+                         {{/*                    b.onchange = function () {*/}}
+                         {{/*                        let ffa = document.getElementById("fetchFormula")*/}}
+                         {{/*                        $('#topic').val();*/}}
+                         {{/*                        let da = $('#topic option:selected').val();*/}}
+                         {{/*                        if (da != "配套试题") {*/}}
+                         {{/*                            peitaoLabel.style.display = "none"*/}}
+                         {{/*                            ffa.style.display = "none"*/}}
+                         {{/*                        } else {*/}}
+                         {{/*                            peitaoLabel.style.display = "block"*/}}
+                         {{/*                            ffa.style.display = "block"*/}}
+                         {{/*                            fetchFormula.value = typ*/}}
+                         {{/*                        }*/}}
+                         {{/*                    }*/}}
+
+                         {{/*                </script>*/}}
+                     </div>
+                 </div>
+                 <br>
+
+                 <input value="提交" type="submit" class="btn btn-info mx-auto text-center" style="display: block">
+             </form>
+         </div>
+     </div>
+    </div>
+{{end}}

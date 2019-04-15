@@ -1,0 +1,7 @@
+{{define "smallDonate"}}
+    {{range $i,$v := .Value}}
+        <a href="{{$v.Href}}" class="border border-white" style="text-decoration: none">
+        <img src="https://raw.githubusercontent.com/realnudao/images/master/alipay.png" alt="{{$v.SmallDonateData}}" class="img-fluid rounded-circle" width="6%">
+        </a>
+    {{end}}
+{{end}}

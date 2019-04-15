@@ -1,0 +1,22 @@
+{{define "content"}}
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <h3>登陆界面</h3>
+    <form action="/signUp" method="post">
+        <div class="form-group">
+            <small class="text-muted">
+                请输入用户名
+            </small>
+                <input type="text" class="form-control" name="signUpUserName" placeholder="用户名登陆" required>
+            <small class="text-muted">
+                请输入密码
+            </small>
+                <input type="password" class="form-control" name="signUpPassword" placeholder="密码" required>
+            <br>
+                <input type="submit"  value="登陆" class="btn btn-info form-control">
+    </div>
+    </form>
+{{end}}

@@ -1,0 +1,24 @@
+{{define "content"}}
+    <p>
+      控制台<a href="/setUser">设置员工</a>
+        <a href="/signOut">退出</a>
+    </p>
+        <form action="/content" method="post" >
+            <div class="form-group"></div>
+            <input name="result" placeholder="输入要查询的信息" type="text" class="form-control">
+            <br>
+            <input name="contentPlus" placeholder="通过contentPlus精确的显示content内容" type="text" class="form-control">
+            <br>
+            <input name="commentID" placeholder="通过commentID 精确的显示内容" type="text" class="form-control">
+            <br>
+            <input name="userName" placeholder="通过userPlus 精确的显示user" type="text" class="form-control">
+            <br>
+{{/*        <select name="typeList" class="form-control">*/}}
+{{/*        <option value="1">通过plus搜索用户</option>*/}}
+{{/*        <option value="2">通过plus搜索文章</option>*/}}
+{{/*        <option value="3">通过plus搜索评论</option>*/}}
+{{/*        </select>*/}}
+            <br>
+            <input value="提交" type="submit" class="form-control btn btn-info">
+        </form>
+{{end}}

@@ -1,0 +1,51 @@
+{{define "index"}}
+    {{template "smallNav".}}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <p class="text-black">本文档支持 markdown</p>
+                <br>
+                <p class="text-black">
+                    基本用法：
+                </p>
+                <pre>
+title：
+
+# 题目
+## 题目
+### 题目
+
+分割线
+---
+
+分级：
+1. 第一
+2. 第二
+3. 第三
+                </pre>
+                <a class="text-info" href="https://github.com/thomashuke/markdown">具体参考</a>
+            </div>
+            <div class="col-md-6 max-auto">
+                <p class="text-black">
+                    提出您的意见
+                </p>
+                {{template "smallEditor".}}
+            </div>
+            <div class="col-md-3">
+            <div class="google-ads">
+                <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                <!-- mathcool -->
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-3341767526260446"
+                     data-ad-slot="3571898718"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+                <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
+            </div>
+        </div>
+    </div>
+{{end}}

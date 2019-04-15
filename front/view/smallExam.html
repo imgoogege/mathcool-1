@@ -1,0 +1,35 @@
+{{/*练习的小题*/}}
+{{define "smallExam"}}
+<div >
+    {{if .isTypeList}}
+    {{if .isHave}}
+        <p class="text-info text-muted" style="font-size: 1.5rem">配套练习题</p>
+
+        <h4>请出题 <a href="/question?motherContentPlus={{.contentPlus}}&typeList=6">点击出题</a></h4>
+
+    {{range $k,$v := .small}}
+        <div class="container-fluid alert alert-secondary" style="border-bottom: rgba(240,240,240,1) 0.1rem solid">
+        <div class="row">
+            <div col-3>
+                {{$v.title}}
+            </div>
+            <div col-9>
+                <a class="text-muted" href="/u/{{$v.userName}}">{{$v.userName}}</a>
+            </div>
+        </div>
+            <div class="row">
+                <div col-12>
+                    <p>
+                        <span style="color: rgba(1,1,1,0);font-size: 0.1px">{{$v.contentPlus}}</span>
+                        {{$v.contentValue}}
+                    </p>
+                </div>
+            </div>
+    </div>
+    {{end}}
+    {{else}}
+        还没有配套的小题，请您出题 <a href="/question?motherContentPlus={{.contentPlus}}&typeList=6">点击出题</a>
+    {{end}}
+    {{end}}
+</div>
+{{end}}

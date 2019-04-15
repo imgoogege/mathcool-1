@@ -1,0 +1,84 @@
+{{define "text_center"}}
+    {{/*数学排行榜*/}}
+        <div class="row">
+            <div class="col-12">
+                <br>
+                <br>
+                <br>
+                <br>
+                <div id="testlist" style="width: 21rem;height: 30rem;overflow: hidden">
+                </div>
+                <script type="text/javascript">
+                    // 基于准备好的dom，初始化echarts实例
+                    var myChart = echarts.init(document.getElementById('testlist'));
+
+                    // 指定图表的配置项和数据
+                    var option = {
+                        opts:{
+                            height:"null",
+                            width:"null",
+                        },
+                        title: {
+                            text: 'mathcool 出题贡献量前20'
+                        },
+                        tooltip: {},
+                        legend: {
+
+                        },
+                        series: [{
+                            name: '出题量',
+                            type: 'pie',
+                            radius:"40%",
+                            roseType: 'angle',
+                            data: [
+                                {{range $k,$v:= .dataSlice }}
+                                {
+                                    name:{{$v.userName}},
+                                    value:{{$v.number}},
+                                    href:{{$v.userPlus}}
+                                },
+                                {{end}}
+                            ]
+                        }]
+                    };
+                    // 使用刚指定的配置项和数据显示图表。
+                    myChart.setOption(option);
+                    function doPost(to, p) { // to:提交动作（action）,p:参数
+                        var myForm = document.createElement("form");
+                        myForm.method = "get";
+                        myForm.action = to;
+                        for (var i in p){
+                            var myInput = document.createElement("input");
+                            myInput.setAttribute("name", i); // 为input对象设置name
+                            myInput.setAttribute("value", p[i]); // 为input对象设置value
+                            myForm.appendChild(myInput);
+                        }
+                        document.body.appendChild(myForm);
+                        myForm.submit();
+                        document.body.removeChild(myForm); // 提交后移除创建的form
+                    }
+                    // myChart.on("click",function () {
+                    //     let t = echarts.getInstanceByDom.name
+                    //     doPost("/u/"+t , "")
+                    // })
+                </script>
+            </div>
+        </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="google-ads">
+                <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                <!-- mathcool -->
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-3341767526260446"
+                     data-ad-slot="3571898718"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+                <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
+        </div>
+    </div>
+{{end}}

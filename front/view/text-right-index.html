@@ -1,0 +1,17 @@
+{{define "text_right"}}
+    <div class="text_right" style="padding-left:0.1rem">
+            <div class="row">
+                <div class="col-12 col-sm-12">
+                    <ul class="navbar-nav">
+                    {{range $k,$v := .rightHot}}
+                        {{/*平时隐藏*/}}
+                        <li class="test-right-li" style="line-height: 1.3rem">
+                            <a class="text-muted" style="font-size: 0.8rem" href="/w?contentPlus={{$v.contentPlus}}">{{$v.title}}</a>
+                            <br>
+                        </li>
+                    {{end}}
+                    </ul>
+                </div>
+            </div>
+    </div>
+{{end}}

@@ -1,0 +1,223 @@
+{{define "text_center"}}
+    <div class="container-fluid" style="padding: 0px;margin: 0px">
+    <div class="row">
+    <div class="col-12" >
+        <div class="row">
+            <div class="col-12 text-center">
+                <div class="alert alert-dark" role="alert">
+                    <span href="#" class="alert-link">用户名：</span> {{.userName}}
+                </div>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <div class="alert alert-light" role="alert">
+                    <span href="#" class="alert-link">出生日期：</span> {{.year}}
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="alert alert-light" role="alert">
+                    <span href="#" class="alert-link">性别：</span> {{.sex}}
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <div class="alert alert-light" role="alert">
+                    <p href="#" class="alert-link">个人介绍：</p>
+                    <p href="#" class="alert-link">{{.description}}</p>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="alert alert-light" role="alert">
+                    <p href="#" class="alert-link">加入本网站时间：</p>
+                    <p href="#" class="alert-link">{{.joinTime}}</p>
+                </div>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <div class="alert alert-light" role="alert">
+                    <span href="#" class="alert-link">手机号：</span> {{.phoneNumber}}
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="alert alert-light" role="alert" style="overflow:scroll">
+                    <p href="#" class="alert-link">{{.email}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class=" col-12">
+                <div class="row ">
+                    <div class="col-12">
+                        <a class="text-danger" style="text-decoration: none" href="/changeMS"><p class="text-center font-weight-light  alert alert-danger"  style="font-size: 1.3rem">修改信息</p></a>
+                    </div>
+                    <div class="col-12">
+                            <!-- 按钮：用于打开模态框 -->
+                            <a class="text-info" style="text-decoration: none"  data-toggle="modal" data-target="#myModal" href="#">
+                                <p class="text-center font-weight-light  alert alert-danger"  style="font-size: 1.3rem">上传照片</p>
+                            </a>
+
+                            <!-- 模态框 -->
+                            <div class="modal fade" id="myModal">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+
+                                        <!-- 模态框头部 -->
+                                        <div class="modal-header">
+                                            <h4 class="modal-title">上传照片</h4>
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        </div>
+
+                                        <!-- 模态框主体 -->
+                                        <div class="modal-body">
+                                            <code>仅支持 'jpg' 'png' 'gif' 'jpeg' 格式的图片</code>
+                                           <form method="post" class="form-group" enctype="multipart/form-data" action="/addImage" name="upImage">
+                                               <p class="text-muted">请选择您要上传的图片</p>
+                                               <input class="form-control" name="file" type="file" multiple="multiple" onchange="check()">
+                                               <input class="form-control btn btn-info" type="submit">
+                                           </form>
+                                        </div>
+                                        <script>
+                                            function check() {
+                                                var fileNameArr = document.upImage.file.value.toLowerCase().split('.')
+                                                var suffix = fileNameArr[fileNameArr.length -1]
+                                                if (suffix ==''){
+                                                    alert('文件不能为空')
+                                                    return false
+                                                }else {
+                                                    if (suffix == 'gif' || suffix == 'jpg' || suffix == 'bmp' || suffix == 'png' || suffix == 'jpeg'){
+                                                        var imgSizeSize = document.upImage.files
+                                                        for (let k = imgSizeSize[0];k < imgSizeSize.length;k++){
+                                                            let imgSize = imgSizeSize[k].size
+                                                            if (imgSize < 1024 *1024*3){
+                                                                return true
+                                                            }else {
+                                                                alert('文件太大')
+                                                                return false
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+
+                                        </script>
+                                        <!-- 模态框底部 -->
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                    <div class="col-12">
+                        <p class="text-muted">显示images</p>
+                        <div class="row">
+                            {{range $k,$v := .imgSlice}}
+                                <!-- 模态框 -->
+                                <div class="modal fade" id="myModal{{$k}}">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <!-- 模态框头部 -->
+                                            <div class="modal-header">
+                                                <h4 class="modal-title">复制下列信息即可粘贴图片</h4>
+                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            </div>
+                                            <!-- 模态框主体 -->
+                                            <div class="modal-body">
+                                                <p>![{{$v.imgValue}}](/static/img/{{$v.imgValue}})</p>
+                                            </div>
+
+                                            <!-- 模态框底部 -->
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <a data-toggle="modal" data-target="#myModal{{$k}}" href="#"><img src="/static/img/{{$v.imgValue}}" class="image-fluid rounded-circle" style="width: 50%"></a>
+                                   <a class="font-small" href="/deleteImage?imgValue={{$v.imgValue}}&imgID={{$v.imgID}}">删除</a>
+                                </div>
+                            {{end}}
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="row" style="border-bottom: rgba(185,187,190,1) 1px solid;padding-bottom: 0.1rem">
+            <div class=" col-12 col-sm-3 col-md-3"><a href="/user?typeList=1" class="text-white text-center" style="position: relative;top: 0.6rem"><button class="btn {{.css1}}">文章</button></a></div>
+            <div class="col-12 col-sm-1 col-md-1"></div>
+{{/*            <div class=" col-12 col-sm-3 col-md-3"><a href="/user?typeList=2" class="text-white text-center" style="position: relative;top: 0.6rem"><button class="btn {{.css2}}">消息</button></a></div>*/}}
+            <div class="col-12 col-sm-1 col-md-1"></div>
+            <div class=" col-12 col-sm-3 col-md-3"><a href="/user?typeList=2" class="text-white text-center" style="position: relative;top: 0.6rem"><button class="btn {{.css3}}">评论</button></a></div>
+            <div class="col-12 col-sm-1 col-md-1"></div>
+            <br>
+            <br>
+        </div>
+        <br>
+        <div class="row" >
+            {{if .typeList}}
+            {{range $k,$v := .sliceData}}
+            <div class="col-4 border-bottom">
+                <p class="alert alert-primary"><a class="text-primary" href="/w?contentPlus={{$v.contentPlus}}">{{$v.title}}</a></p>
+            </div>
+            <div class="col-4 text-center border-bottom">
+                <button type="button" style="position: relative;top: 1rem;width: 80%" class="btn btn-info align-middle"><span style="color: black"></span>{{$v.typeList}}</button>
+            </div>
+            <div class="col-4 text-center border-bottom">
+                    <button type="button" style="position: relative;top: 1rem" class="btn btn-danger align-middle"> <a href="/deleteContent?contentPlus={{$v.contentPlus}}" class="text-white align-middle">删除</a></button>
+            </div>
+            {{end}}
+
+            {{else}}
+{{/*                comment*/}}
+                {{range $k,$v := .sliceData}}
+                    <div class="col-8 border-bottom" class="alert alert-primary">
+                        <p><a class="text-primary" href="/w?contentPlus={{$v.contentPlusComment}}">{{$v.commentValue}}</a></p>
+                    </div>
+                    <div class="col-4 text-center border-bottom">
+                        <button type="button" style="position: relative;top: 1rem" class="btn btn-danger align-middle"> <a href="/deleteComment?commentID={{$v.commentID}}&contentPlus={{$v.contentPlus}}" class="text-white align-middle">删除</a></button>
+                    </div>
+                {{end}}
+            {{end}}
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-12 text-center">
+                <ul class="pagination">
+                    <li class="page-item" id="btn{{.pagePre}}"><a class="page-link" href='/user?page={{.pagePre}}' >&lt</a></li>
+                    <li class="page-item active" id="btn{{.pageThis}}"><a class="page-link" href='/user?page={{.pageThis}}'>{{.pageThis}}</a></li>
+                    {{range $k,$v := .page}}
+                        <li class="page-item page-item-control" id="btn{{$v}}"><a class="page-link" href='/user?page={{$v}}'>{{$v}}</a></li>
+                    {{end}}
+                    <li class="page-item" id="btn{{.pageLast}}"><a class="page-link" href='/user?page={{.pageLast}}'>&gt</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="google-ads">
+                    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                    <!-- mathcool -->
+                    <ins class="adsbygoogle"
+                         style="display:block"
+                         data-ad-client="ca-pub-3341767526260446"
+                         data-ad-slot="3571898718"
+                         data-ad-format="auto"
+                         data-full-width-responsive="true"></ins>
+                    <script>
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+{{end}}

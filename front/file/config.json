@@ -1,0 +1,5 @@
+{
+  "serverURL" :  "http://localhost:520",
+  "dbname"  :"coastroad",
+  "version" : "0.1.0"
+}

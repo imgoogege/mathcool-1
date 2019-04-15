@@ -1,0 +1,110 @@
+{{define "text_center"}}
+    <div class="container text-left">
+        <br>
+        <div class="row" style="padding-top: 1rem">
+            <div class="col-6 col-sm-6">
+                <h3 class="text-dark"><i class="fas fa-fighter-jet"></i><i class="fas fa-fighter-jet"></i><i class="fas fa-fighter-jet"></i></h3>
+
+            </div>
+            <div class="col-6 col-sm-6">
+                <a href="/question" class="text-white"> <div class="btn btn-primary float-right">点这里</div></a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-3 col-3"></div>
+            <div class="col-sm-9 col-9">
+                <a class="btn btn-light" href="/?typeList=1">时间</a>
+                <a class="btn btn-light" href="/?typeList=2">浏览数</a>
+                <a class="btn btn-light" href="/?typeList=3">赞数</a>
+            </div>
+        </div>
+        <hr>
+        <div class="row" style="color: white">
+            1
+        </div>
+
+    {{range $k,$v := .dataRange}}
+        <div class="row " style="border-bottom: rgba(204,208,211,1) 0.01rem solid;padding-bottom: 0.5rem"> {{/*这里 这里就是循环的地方。<*/}}
+           <div class="col-sm-4 col-12" style=""> {{/*左<*/}}
+               <div class="row ">
+                   <div class="col-sm-4 col-4">
+                       <span>
+                           {{$v.see_number}}
+                       </span>
+                       <br>
+                       <span class="text-muted">
+                           view
+                       </span>
+                   </div>
+                   <div class="col-sm-4 col-4">
+                       <span>
+                           {{$v.userName}}
+                       </span>
+                       <br>
+                       <span class="text-muted" >
+                           作者
+                       </span>
+
+                   </div>
+                   <div class="col-sm-4 col-4">
+                       <span>
+                           {{$v.zan}}
+                       </span>
+                       <br>
+                       <span class="text-muted">
+                           👍
+                       </span>
+                   </div>
+               </div>
+           </div>
+            <div class="col-sm-8 col-12"> {{/*右边<*/}}
+                       {{/*字数要小于等于40*/}}
+                       <a class="text-primary" href="/w?contentPlus={{$v.contentPlus}}">{{$v.title}}</a>
+
+                <div class="row"> {{/*右边的第二层row<*/}}
+                <div class="col-sm-7 col-12 text-center" style="margin-top: 0.7rem">{{/*这个是flag，就是这个block的flag<*/}}
+{{/*                    todo: 主题flg 的地方，暂时先不写了。*/}}
+                    <span class="badge badge-secondary">{{$v.tag}}</span>
+{{/*                    <span class="badge badge-secondary">""</span>*/}}
+{{/*                    <span class="badge badge-secondary">""</span>*/}}
+                </div>
+                <div class="col-sm-5 col-12">
+                    <small style="margin-top: 1rem;display: block" class="text-muted text-center">{{$v.join_time}}</small>
+                </div>
+                </div>
+            </div>
+
+        </div>
+        <br>
+        <br>
+{{end}}
+        <hr>
+        <div class="row">
+            <div class="col-12 col-sm-12 text-center">
+                <ul class="pagination">
+                    <li class="page-item" id="btn{{.pagePre}}"><a class="page-link" href='/?page={{.pagePre}}' >&lt</a></li>
+                    <li class="page-item active" id="btn{{.pageThis}}"><a class="page-link" href='/?page={{.pageThis}}'>{{.pageThis}}</a></li>
+                    {{range $k,$v := .page}}
+                        <li class="page-item page-item-control" id="btn{{$v}}"><a class="page-link" href='/?page={{$v}}'>{{$v}}</a></li>
+                    {{end}}
+                    <li class="page-item" id="btn{{.pageLast}}"><a class="page-link" href='/?page={{.pageLast}}'>&gt</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-12  google-ads" >
+                <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                <!-- mathcool -->
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-3341767526260446"
+                     data-ad-slot="3571898718"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+                <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
+        </div>
+    </div>
+{{end}}

@@ -1,0 +1,60 @@
+{{define "content"}}
+    <h3>SHOW</h3>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h4>search</h4>
+                {{range $k,$v := .resultSlice}}
+                    <div class="row">
+                        <div class="col-7">
+                            <p>
+                            <a href="https://nudao.xyz/w?contentPlus={{$v.contentPlus}}">{{$v.title}}</a>
+                            </p>
+                        </div>
+                        <div class="5"><a href="/deleteContent?contentPlus={{$v.contentPlus}}">删除</a></div>
+                    </div>
+                {{end}}
+                <hr>
+                <h4>content</h4>
+                {{range $k,$v := .contentSlice}}
+                    <div class="row">
+                        <div class="col-7">
+
+                            <p>
+                                <a href="https://nudao.xyz/w?contentPlus={{$v.contentPlus}}">{{$v.title}}</a>
+                            </p>
+                        </div>
+                        <div class="5"><a href="/deleteContent?contentPlus={{$v.contentPlus}}">删除</a></div>
+                    </div>
+                {{end}}
+                <hr>
+                <h4>comment</h4>
+                {{range $k,$v := .commentSlice}}
+                    <div class="row">
+                        <div class="col-7">
+                            <p>
+                                {{$v.commentValue}}
+                            </p>
+                            <p>
+                                {{$v.commentID}}
+                            </p>
+                        </div>
+                        <div class="5"><a href="/deleteComment?commentID={{$v.commentID}}">删除</a></div>
+                    </div>
+                {{end}}
+                <hr>
+                <h4>USER</h4>
+                {{range $k,$v := .userSlice}}
+                    <div class="row">
+                        <div class="col-7">
+                            <p>{{$v.userName}}</p>
+                            <p>{{$v.userPlus}}</p>
+                            <p>{{$v.userID}}</p>
+                        </div>
+                        <div class="5"><a href="/deleteUser?userID={{$v.userID}}">删除</a></div>
+                    </div>
+                {{end}}
+            </div>
+        </div>
+    </div>
+{{end}}
