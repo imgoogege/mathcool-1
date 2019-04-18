@@ -1305,7 +1305,7 @@ func weiboSignInGET(ctx *gin.Context) {
 		})
 		return
 	}
-	reUrl := "https://127.0.0.1/weiboSignIn"
+	reUrl := "https://nudao.xyz/weiboSignIn"
 	query := fmt.Sprintf("https://api.weibo.com/oauth2/access_token?client_id=3266637437&client_secret=33dfb7df4d81fa187c9377af1a75adb9&grant_type=authorization_code&redirect_uri=%s&code=%s", reUrl, code)
 	rc := NewFrontCookie("mathcool", "", "", "")
 	value, err := rc.PostValueToServerBySessionPlus(query, "", nil)
