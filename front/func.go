@@ -1315,6 +1315,7 @@ func weiboSignInGET(ctx *gin.Context) {
 	value1, err := rc.PostValueToServerBySessionPlus(query, "", nil)
 	ifErrReturn(err, ctx, "无法获取信息")
 	uid1 := fastjson.GetInt(value1, "uid")
+	fmt.Println("测试accs",accessToken,uid1)
 	query = fmt.Sprintf("https://api.weibo.com/2/users/show.json?access_token=%s&uid=%d", accessToken, uid1)
 	value, err = rc.GetValueFromServerBySessionPlus(query)
 	ifErrReturn(err, ctx, "无法获取信息")
