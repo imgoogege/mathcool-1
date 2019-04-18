@@ -1310,13 +1310,11 @@ func weiboSignInGET(ctx *gin.Context) {
 	rc := NewFrontCookie("mathcool", "", "", "")
 	value, err := rc.PostValueToServerBySessionPlus(query, "", nil)
 	ifErrReturn(err, ctx, "获取信息失败,您无法登陆")
-	fmt.Println("为什么",string(value))
 	accessToken := fastjson.GetString(value, "access_token") // sessionPlus
 	query = fmt.Sprintf("https://api.weibo.com/oauth2/get_token_info?access_token=%s", accessToken)
 	value1, err := rc.PostValueToServerBySessionPlus(query, "", nil)
 	ifErrReturn(err, ctx, "无法获取信息")
 	uid1 := fastjson.GetInt(value1, "uid")
-	fmt.Println("测试accs",accessToken,uid1)
 	query = fmt.Sprintf("https://api.weibo.com/2/users/show.json?access_token=%s&uid=%d", accessToken, uid1)
 	value, err = rc.GetValueFromServerBySessionPlus(query)
 	ifErrReturn(err, ctx, "无法获取信息")
