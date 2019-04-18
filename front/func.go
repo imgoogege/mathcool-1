@@ -376,7 +376,7 @@ func questionGET(ctx *gin.Context) {
 		if err != nil {
 			glog.Error(err)
 		}
-		nav(ctx,"nudao.xyz---数学酷吗",data)
+		nav(ctx, "nudao.xyz---数学酷吗", data)
 		hot := make([]map[string]interface{}, 0)
 		rightHot(fc, ctx, &hot)
 		data["rightHot"] = hot
@@ -458,7 +458,7 @@ func watchGET(ctx *gin.Context) {
 	slice2 := make([]map[string]interface{}, 0)
 	for _, v := range oneValue2.GetArray("data") {
 		slice2 = append(slice2, map[string]interface{}{
-			"contentPlus":string(v.GetStringBytes("contentPlus")),
+			"contentPlus":  string(v.GetStringBytes("contentPlus")),
 			"contentValue": template.HTML(string(v.GetStringBytes("contentValue"))),
 			"userName":     string(v.GetStringBytes("userName")),
 			"userPlus":     string(v.GetStringBytes("userPlus")),
@@ -502,8 +502,8 @@ func userGET(ctx *gin.Context) {
 	fc := NewFrontCookie("mathcool", "", "", "")
 	fc.GetCookie("mathcool", ctx)
 	b, _ := ctx.Get("makeSureUser")
-	fmt.Println("dd",b)
-	if b.(bool){
+
+	if b.(bool) {
 		typeList := ctx.Query("typeList")
 		if typeList == "" {
 			typeList = "1"
@@ -576,7 +576,7 @@ func userGET(ctx *gin.Context) {
 		err = tem.Execute(ctx.Writer, data)
 		ifErrReturn(err, ctx, "无法聚集成html")
 	} else {
-		http.Redirect(ctx.Writer, ctx.Request, "/noSign",301)
+		ctx.JSON(200, "没登录")
 	}
 }
 
@@ -826,7 +826,7 @@ func changeMSPOST(ctx *gin.Context) {
 			})
 			return
 		} else {
-			fc.value=""
+			fc.value = ""
 			fc.SetCookie(ctx)
 			http.Redirect(ctx.Writer, ctx.Request, "/signIn", http.StatusMovedPermanently)
 		}
@@ -1217,7 +1217,7 @@ func addImagePOST(ctx *gin.Context) {
 				ifErrReturn(err, ctx, "无法剖析file")
 				typeValue := v.Filename[len(v.Filename)-3:]
 				typeValue = strings.ToLower(typeValue)
-				if typeValue == "png" || typeValue == "jpeg" || typeValue == "jpg"||typeValue =="peg"|| typeValue == "gif" {
+				if typeValue == "png" || typeValue == "jpeg" || typeValue == "jpg" || typeValue == "peg" || typeValue == "gif" {
 					defer file.Close()
 					creatFile, err := os.Create("./public/img/" + fmt.Sprintf("%x", t) + v.Filename)
 					defer creatFile.Close()
@@ -1228,9 +1228,9 @@ func addImagePOST(ctx *gin.Context) {
 						r := regexp.MustCompile("./public/img/")
 						realName := r.ReplaceAllString(creatFile.Name(), "")
 						data[i] = realName
-					}else {
+					} else {
 						err = os.Remove(creatFile.Name())
-						ifErrReturn(err,ctx,"无法删除")
+						ifErrReturn(err, ctx, "无法删除")
 					}
 				}
 				//_, err = io.Copy(creatFile, file)
@@ -1262,7 +1262,7 @@ func addImagePOST(ctx *gin.Context) {
 		http.Redirect(ctx.Writer, ctx.Request, "/user", 301)
 
 	} else {
-		http.Redirect(ctx.Writer,ctx.Request,"/noSign",301)
+		http.Redirect(ctx.Writer, ctx.Request, "/noSign", 301)
 	}
 }
 
@@ -1291,7 +1291,72 @@ func deleteImageGET(ctx *gin.Context) {
 		}
 		http.Redirect(ctx.Writer, ctx.Request, "/user", 301)
 	} else {
-		http.Redirect(ctx.Writer,ctx.Request,"/noSign",301)
+		http.Redirect(ctx.Writer, ctx.Request, "/noSign", 301)
 	}
 
+}
+
+func weiboSignInGET(ctx *gin.Context) {
+	code := ctx.Query("code")
+	if code == "" {
+		ctx.JSON(200, gin.H{
+			"data":    "无法通过微博登陆",
+			"success": "error",
+		})
+		return
+	}
+	reUrl := "https://127.0.0.1/weiboSignIn"
+	query := fmt.Sprintf("https://api.weibo.com/oauth2/access_token?client_id=3266637437&client_secret=33dfb7df4d81fa187c9377af1a75adb9&grant_type=authorization_code&redirect_uri=%s&code=%s", reUrl, code)
+	rc := NewFrontCookie("mathcool", "", "", "")
+	value, err := rc.PostValueToServerBySessionPlus(query, "", nil)
+	ifErrReturn(err, ctx, "获取信息失败,您无法登陆")
+	accessToken := fastjson.GetString(value, "access_token") // sessionPlus
+	query = fmt.Sprintf("https://api.weibo.com/oauth2/get_token_info?access_token=%s", accessToken)
+	value1, err := rc.PostValueToServerBySessionPlus(query, "", nil)
+	ifErrReturn(err, ctx, "无法获取信息")
+	uid1 := fastjson.GetInt(value1, "uid")
+	query = fmt.Sprintf("https://api.weibo.com/2/users/show.json?access_token=%s&uid=%d", accessToken, uid1)
+	value, err = rc.GetValueFromServerBySessionPlus(query)
+	ifErrReturn(err, ctx, "无法获取信息")
+	userName := fastjson.GetString(value, "screen_name")
+	location := fastjson.GetString(value, "location")
+	gender := fastjson.GetString(value, "gender")
+	description := fastjson.GetString(value, "description")
+	var sex int
+	if gender == "男" {
+		sex = 1
+	} else {
+		sex = 2
+	}
+	query = fmt.Sprintf("/weiboSignIn?uid=%s%d", "weibo", uid1)
+	_, err = rc.PostValueToServerBySessionPlus(serverURL+query, "", gin.H{
+		"userName":    userName,
+		"location":    location,
+		"sex":         sex,
+		"description": description,
+	})
+	if err == nil {
+		rc.value = fmt.Sprintf("%s%d", "weibo", uid1)
+		rc.SetCookie(ctx)
+		http.Redirect(ctx.Writer, ctx.Request, "/", 200)
+	} else {
+		ctx.JSON(200, gin.H{
+			"success": "error",
+			"data":    "无法通过微博登陆",
+		})
+	}
+	//id	int64	用户UID
+	//idstr	string	字符串型的用户UID
+	//screen_name	string	用户昵称
+	//name	string	友好显示名称
+	//province	int	用户所在省级ID
+	//city	int	用户所在城市ID
+	//location	string	用户所在地
+	//description	string	用户个人描述
+	//url	string	用户博客地址
+	//profile_image_url	string	用户头像地址（中图），50×50像素
+	//profile_url	string	用户的微博统一URL地址
+	//domain	string	用户的个性化域名
+	//weihao	string	用户的微号
+	//gender
 }

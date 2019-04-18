@@ -17,7 +17,7 @@ func init() {
 	glog.V(1).Infoln("release: coastroad is runing.")
 	glog.V(2).Infoln("debug:coastroad is runing.") // glog v 1 是调试阶段 2 是正式部署阶段。
 	var err error
-	dbHere, err = sql.Open("mysql", "")
+	dbHere, err = sql.Open("mysql", "root:359258Ls@tcp(localhost:3306)/mathcoolEnd")
 	dbHere.SetMaxOpenConns(200)
 	dbHere.SetMaxIdleConns(2)
 	if err != nil {

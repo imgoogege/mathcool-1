@@ -120,5 +120,7 @@ func route(engin *gin.Engine) {
 	// 增加image
 	engin.POST("/addImage", addImagePOST)
 	engin.GET("/deleteImage", deleteImageGET)
+	engin.GET("/weiboSignIn",weiboSignInGET)
+	engin.GET("/weiboSignOut")
 
 }

@@ -63,6 +63,39 @@
                 <div id="signUpTishi"></div>
             </div>
         </div>
+        <hr>
+        <div class="row">
+            <div class="col-12">
+                <p class="text-center">
+                    使用第三方进行注册
+                </p>
+            </div>
+            </div>
+        <div class="row">
+            <div class="col-sm-3 col-md-3">
+            </div>
+            <div class="col-6 col-sm-6 col-md-6">
+                <div class="row">
+                    {{/*                    <div class="col-md-4 col-sm-4">*/}}
+                    {{/*                        <a href="/">*/}}
+                    {{/*                        <img src="/static/img/wechatSignIn.png" width="40%" alt="wechat" class="img-fluid">*/}}
+                    {{/*                        </a>*/}}
+                    {{/*                    </div>*/}}
+                    {{/*                    <div class="col-md-4 col-sm-4">*/}}
+                    {{/*                        <a href="/">*/}}
+                    {{/*                        <img src="/static/img/qqSignIn.png" alt="qq" width="40%" class="img-fluid">*/}}
+                    {{/*                        </a>*/}}
+                    {{/*                    </div>*/}}
+                    <div class="col-md-4 col-sm-4">
+                        <a href="https://api.weibo.com/oauth2/authorize?client_id=3266637437&redirect_uri=https://127.0.0.1/weiboSignIn">
+                            <img src="/static/img/weibo.png" alt="weibo" width="40%" class="img-fluid">
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3 col-md-3">
+            </div>
+        </div>
     </div>
     {{template "foot".}}
 {{end}}

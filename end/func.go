@@ -1669,3 +1669,69 @@ func readImageGET(ctx *gin.Context) {
 		})
 	}
 }
+
+// 微博登陆
+func weiboSignInGET(ctx *gin.Context) {
+
+}
+func isFirst(ctx *gin.Context) {
+	plus := ctx.Query("uid")
+	fmt.Println("测试uid", plus)
+	b, _ := ctx.Get("makeUserIsUser")
+	if b.(bool) {
+
+	} else {
+		v, _ := ioutil.ReadAll(ctx.Request.Body)
+		defer ctx.Request.Body.Close()
+		userName := fastjson.GetString(v, "userName")
+		sex := fastjson.GetInt(v, "sex")
+		description := fastjson.GetString(v, "description")
+		s := NewSession()
+		email := "weibo@weibo.weibo" + plus
+		user_plus, _ := Encryption(1, userName)
+		st, err := dbHere.Prepare("INSERT user SET email=?,user_name=?,sex=?,user_plus=?,salt=?,db_password=?,description=?")
+		ifErrReturn(err, ctx, gin.H{"success": "error", "data": "无法insertusername"})
+		_, err = st.Exec(email, userName, sex, user_plus, "1", "weibo", description)
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
+		rows, err := dbHere.Query("SELECT user_id FROM user WHERE user_name=?", userName)
+		ifErrReturn(err, ctx, gin.H{"success": "error", "data": "query err"})
+		defer rows.Close()
+		var user_id int64
+		for rows.Next() {
+			err = rows.Scan(&user_id)
+			if err != nil {
+				fmt.Println(err)
+				return
+			}
+		}
+		st, err = dbHere.Prepare("INSERT session SET user_id=?,session_plus=?")
+		ifErrReturn(err, ctx, gin.H{"success": "error", "data": "query err"})
+		_, err = st.Exec(user_id, plus)
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
+		s.UserID = user_id
+		s.Email = email
+		s.SessionPlus = plus
+		s.Sex = sex
+		s.Description = description
+		s.UserName = userName
+		s.UserPlus = user_plus
+		SessionMap[plus] = s
+	}
+
+}
+
+// 微博登出
+func weiboSignOutGET(ctx *gin.Context) {
+	plus := ctx.Query("sessionPlus")
+	if _, ok := SessionMap[plus]; !ok {
+
+	} else {
+		delete(SessionMap, plus)
+	}
+}

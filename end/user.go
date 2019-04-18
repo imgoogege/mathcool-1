@@ -22,10 +22,20 @@ func isUser(ctx *gin.Context) {
 	// 3 否则就开始启动数据库进行访问，使用sessionID 看看是否可以取出来值，如果可以就将这个sessionID 加入到这个全局的map中。
 
 	//1
+	var thing string
 	sessionPlus := ctx.Query("sessionPlus") // 得到这个前端传入的sessionID 也就是后端的sessionPlus
-	if _, ok := SessionMap[sessionPlus]; !ok {
+	uid := ctx.Query("uid")
+	if sessionPlus == "" && uid != "" {
+		thing = uid
+	}else if sessionPlus != "" && uid == "" {
+		thing = sessionPlus
+	}else {
+		return
+	}
+	if _, ok := SessionMap[thing]; !ok {
 		// 2
 		if rows, err := dbHere.Query("SELECT session_id,user_id FROM session WHERE session_plus=? ", sessionPlus);  err!= nil  {
+			defer rows.Close()
 			ctx.Set("makeUserIsUser",false)
 			return
 		} else {
@@ -46,6 +56,7 @@ func isUser(ctx *gin.Context) {
 			}
 			defer rows.Close()
 			if rows, err = dbHere.Query("SELECT user_plus,user_name,sex,year,join_time,email,phone_number,description,salt,db_password FROM user WHERE user_id=?", u.UserID);  err!= nil{
+				defer rows.Close()
 				ctx.Set("makeUserIsUser",false)
 				ctx.JSON(http.StatusOK,"无法登陆"+fmt.Sprintf("%v",err))
 				fmt.Println(err)
@@ -78,6 +89,7 @@ func isUser(ctx *gin.Context) {
 			}
 			SessionMap[sessionPlus] = s
 			ctx.Set("makeUserIsUser",true)
+			fmt.Println(u)
 			//s.SetSessionToRedis()
 		}
 	} else {

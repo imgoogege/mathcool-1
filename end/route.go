@@ -63,4 +63,9 @@ func route(engine *gin.Engine){
 	engine.GET("/deleteImage",deleteImageGET)
 	// 读取图片
 	engine.GET("/readImage",readImageGET)
+	// 微博登陆
+	engine.POST("/weiboSignIn",isFirst,weiboSignInGET)
+	engine.GET("/weiboSignOut",weiboSignOutGET)
+
+	// 微博登出
 }
