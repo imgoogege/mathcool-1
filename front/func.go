@@ -1322,6 +1322,7 @@ func weiboSignInGET(ctx *gin.Context) {
 	location := fastjson.GetString(value, "location")
 	gender := fastjson.GetString(value, "gender")
 	description := fastjson.GetString(value, "description")
+	fmt.Println(string(value))
 	var sex int
 	if gender == "男" {
 		sex = 1
