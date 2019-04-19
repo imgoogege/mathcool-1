@@ -1339,7 +1339,7 @@ func weiboSignInGET(ctx *gin.Context) {
 	if err == nil {
 		rc.value = fmt.Sprintf("%s%d", "weibo", uid1)
 		rc.SetCookie(ctx)
-		http.Redirect(ctx.Writer, ctx.Request, "/", 200)
+		http.Redirect(ctx.Writer, ctx.Request, "/", 301)
 	} else {
 		ctx.JSON(200, gin.H{
 			"success": "error",
