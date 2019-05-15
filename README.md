@@ -14,3 +14,5 @@
 ![p](https://raw.githubusercontent.com/googege/Files/master/donate.png)
 
 [推荐vps](https://app.cloudcone.com/?ref=2525)
+
+*可支持 **支付宝支付**, 个人提子使用版本 2刀/月，`1T`流量 ，最高`1Gb`带宽， 速度测试:基本上在`1M/s` 以上,最高速度能达到`8M/s`(联通4g)*
